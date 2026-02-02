@@ -241,3 +241,68 @@ function perfomaceReviewer(employeesData) {
 
 const result5 = perfomaceReviewer(employees);
 console.log(result5);
+
+
+
+
+//Problem 31: The Student Scholarship Eligibility
+
+
+/**
+ * ১. একটি ফাংশন তৈরি করো যা এই candidates অ্যারেকে ইনপুট হিসেবে নিবে। 
+ * 
+ * ২. স্কলারশিপ পাওয়ার শর্তগুলো হলো: * GPA: ৪.০ বা তার বেশি। * Income: ৩০,০০০ টাকার কম। * Community Service: অবশ্যই true হতে হবে। 
+ * 
+ * 
+ * ৩. যদি এই তিনটি শর্তই পূরণ হয়, তবে তার status হবে 'Eligible'। অন্যথায় status হবে 'Not Eligible'। ৪. আউটপুট হিসেবে একটি নতুন অ্যারে রিটার্ন করো।
+ */
+
+
+
+
+const candidates = [
+    { name: 'Riad', gpa: 4.8, income: 25000, communityService: true },
+    { name: 'Siam', gpa: 3.5, income: 15000, communityService: true },
+    { name: 'Arafat', gpa: 4.9, income: 60000, communityService: false },
+    { name: 'Nabil', gpa: 4.2, income: 20000, communityService: false },
+    { name: 'Tanvir', gpa: 3.8, income: 12000, communityService: true }
+];
+
+
+function confirmScholarShip(candidatesData){
+
+const localData=structuredClone(candidatesData)
+
+const needGpa=4.0
+const belowIncome=30000
+
+
+for(const x of localData){
+
+
+// used x.communitySerive only because we know fundamental if block only handle when the conditon will true
+
+if(x.gpa>=needGpa && x.income<=belowIncome && x.communityService){
+
+  x.status='Eligible'
+
+}
+
+else{
+  x.status='Not Eligible'
+}
+
+
+}
+
+return localData
+
+
+
+
+}
+
+
+const result6=confirmScholarShip(candidates)
+
+console.log(result6)
