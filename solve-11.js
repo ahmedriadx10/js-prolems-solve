@@ -75,4 +75,101 @@ function analyzeMarks(marksData) {
 }
 
 const result2 = analyzeMarks(marks);
-console.log(result2);
+// console.log(result2);
+
+
+
+//Problem 3: Password Strength Checker
+
+//Function name: checkPassword(password)
+// Rules:
+// Length must be at least 8
+
+// Must contain at least 1 number
+
+// Must contain at least 1 uppercase letter
+
+// Must not contain spaces
+
+
+const testData="hel "
+const testData2='idKhullam3'
+
+
+function passwordStrenchChecker(getPassword){
+
+let hasNumber=0;
+let hasUpper=0;
+const reasons=[]
+
+
+const splitString=getPassword.split('')
+
+
+if(getPassword.length<8){
+  reasons.push('password char less than 8')
+}
+
+
+for(const x of splitString){
+
+  if(Number(x)>=0 && Number(x)<=9){
+
+    hasNumber++
+  }
+
+  if(x>='A' && x<='Z'){
+
+    hasUpper++
+  }
+
+
+
+}
+
+
+if(getPassword.includes(' ')){
+  reasons.push('blank space found')
+}
+
+
+if(hasNumber===0){
+  reasons.push('No Number Found')
+}
+
+else if (hasUpper===0){
+  reasons.push('No Upper Case Found')
+}
+
+
+
+
+
+return {
+
+  valid:reasons.length===0,
+reasons
+
+}
+
+
+}
+
+
+
+const reuslt3=passwordStrenchChecker(testData2)
+
+console.log(reuslt3)
+
+
+
+
+
+
+
+
+
+
+
+
+
