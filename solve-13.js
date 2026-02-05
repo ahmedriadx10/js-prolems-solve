@@ -68,7 +68,7 @@ function smartShopingCart(getShopingData) {
     returnObj.finallBill += x.finalItemPrice;
   }
   returnObj.totalSaved = totalPriceWithoutDiscount - discountPriceWithoutTax;
-  console.log(totalPriceWithoutDiscount);
+
   return returnObj;
 }
 
@@ -135,3 +135,101 @@ const employees = [
   { name: "Arafat", salary: 55000, performance: "Excellent", joinYear: 2021 },
   { name: "Nabil", salary: 25000, performance: "Average", joinYear: 2023 },
 ];
+
+function bounsSystemForEmployee(getData) {
+  const localData = structuredClone(getData);
+  //bonus percentage
+  const excellent_bonus = 10 / 100;
+  const good_bonus = 5 / 100;
+  const compareYear = 2026;
+  const best_perfomance = "excellent";
+  const medium_perfomance = "good";
+
+  const workingData = {
+    employeesDetails: localData,
+    totalCompanyExpense: 0,
+    totalBonusGiven: 0,
+  };
+
+  for (const single of localData) {
+    if (single.performance.toLowerCase() === best_perfomance) {
+      single.perfomanceBonus = single.salary * excellent_bonus;
+    } else if (single.performance.toLowerCase() === medium_perfomance) {
+      single.perfomanceBonus = single.salary * good_bonus;
+    } else {
+      single.perfomanceBonus = 0;
+    }
+
+    if (single.joinYear + 3 <= compareYear) {
+      single.loyalityBonus = 2000;
+    } else {
+      single.loyalityBonus = 0;
+    }
+
+    //calculate every single employees total salary after getting bonus
+
+    const givenBonusCalc = single.perfomanceBonus + single.loyalityBonus;
+
+    single.totalPayOut = single.salary + givenBonusCalc;
+
+    workingData.totalCompanyExpense += single.totalPayOut;
+
+    workingData.totalBonusGiven += givenBonusCalc;
+  }
+
+  return workingData;
+}
+
+const result3 = bounsSystemForEmployee(employees);
+// console.log(result3);
+
+// Problem 64: The Inventory Cleaner (Modified)
+
+/**
+ * ১. একটি ফাংশন লিখবে যা inventory অ্যারে এবং একটি targetKey (যেমন: 'brand') ইনপুট হিসেবে নিবে।\
+ *
+ *  ২. Property Deletion: লুপ চালিয়ে প্রতিটি অবজেক্ট থেকে ওই নির্দিষ্ট targetKey টি একদম ডিলিট করে দিতে হবে। (টিপস: delete কিওয়ার্ড ব্যবহার করবে)।
+ *  ৩. Dynamic Summary: ডিলিট করার পর, প্রতিটি আইটেমের জন্য নিচের ফরম্যাটে একটি স্ট্রিং তৈরি করবে: "Item: [Name], Stock: [Stock], Price: [Price]"
+ * ৪. সবশেষে একটি নতুন অ্যারে রিটার্ন করবে যেখানে শুধু এই স্ট্রিংগুলো থাকবে।
+ */
+
+const inventory = [
+  { id: 1, name: "Laptop", stock: 5, price: 80000, brand: "Dell" },
+  { id: 2, name: "Mouse", stock: 50, price: 1200, brand: "Logitech" },
+  { id: 3, name: "Monitor", stock: 12, price: 15000, brand: "Samsung" },
+  { id: 4, name: "Keyboard", stock: 25, price: 2500, brand: "HP" },
+];
+
+function inventoryCleaner(getData, getKey) {
+  const localData = structuredClone(getData);
+
+  const deletedMessages = [];
+
+  
+  //converted keyName lower case because we set key names in lowerCase
+
+  const convKeyLower = getKey.toLowerCase();
+  for (const x of localData) {
+    if (x.hasOwnProperty(convKeyLower)) {
+      delete x[convKeyLower];
+
+      const getAvailableKeys = Object.entries(x);
+
+      const joinData = [];
+
+      for (const g of getAvailableKeys) {
+        joinData.push(g.join(": "));
+      }
+
+      const createAMessage = joinData.join(" ");
+      const finalMessage = "Avilable Data".concat(" ", createAMessage);
+
+      deletedMessages.push(finalMessage);
+    }
+  }
+
+return deletedMessages
+}
+
+const result4 = inventoryCleaner(inventory, "brand");
+console.log(result4);
