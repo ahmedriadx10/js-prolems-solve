@@ -205,7 +205,6 @@ function inventoryCleaner(getData, getKey) {
 
   const deletedMessages = [];
 
-  
   //converted keyName lower case because we set key names in lowerCase
 
   const convKeyLower = getKey.toLowerCase();
@@ -228,8 +227,46 @@ function inventoryCleaner(getData, getKey) {
     }
   }
 
-return deletedMessages
+  return deletedMessages;
 }
 
 const result4 = inventoryCleaner(inventory, "brand");
-console.log(result4);
+// console.log(result4);
+
+// Problem 66: The Deep Object Hunter (Nested Objects)
+
+// . এমন একটি ফাংশন লিখবে যা শুধু সেই সব অর্ডারের Customer Name রিটার্ন করবে যাদের অর্ডারের status হচ্ছে 'Pending'। ২. আউটপুট হবে একটি সাধারণ অ্যারে। যেমন: ['Riad', 'Arafat']
+
+const userOrders = [
+  {
+    orderId: "ORD01",
+    customer: { name: "Riad", location: "Dhaka" },
+    details: { item: "Laptop", status: "Pending" },
+  },
+  {
+    orderId: "ORD02",
+    customer: { name: "Siam", location: "Rajshahi" },
+    details: { item: "Mouse", status: "Shipped" },
+  },
+  {
+    orderId: "ORD03",
+    customer: { name: "Arafat", location: "Sylhet" },
+    details: { item: "Monitor", status: "Pending" },
+  },
+];
+
+function objectHunter(customerOrders) {
+  const returnData = [];
+  const compare_status = "Pending";
+
+  for (const sep of customerOrders) {
+    if (sep.details.status === compare_status) {
+      returnData.push(sep.customer.name);
+    }
+  }
+
+  return returnData;
+}
+
+const result5 = objectHunter(userOrders);
+console.log(result5);
