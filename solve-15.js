@@ -21,8 +21,8 @@ function strLetterCounter(getString) {
     }
   }
 
-  console.log(returnResult);
+return returnResult
 }
 
 const result = strLetterCounter(str);
-console.log(result);
+// console.log(result);
